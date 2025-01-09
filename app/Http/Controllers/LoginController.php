@@ -35,9 +35,9 @@ class LoginController extends Controller
             if (Auth::user()->role == 'r1') {
                 return redirect('/krywn');
             } elseif (Auth::user()->role == 'r2') {
-                return redirect('/manajer');
+                return redirect('/krywn');
             } elseif (Auth::user()->role == 'r3') {
-                return redirect('/karyawan');
+                return redirect('/krywn');
             }
         } else {
             // Log::info('Login gagal', $infoLogin);
