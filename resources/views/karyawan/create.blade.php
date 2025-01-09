@@ -65,10 +65,37 @@
                         <label for="no_telepon">No Telepon :</label>
                         <input type="text" class="form-control" id="no_telepon" name="no_telepon" required>
                     </div>
+                    <input type="hidden" id="unique_face_id" name="unique_face_id">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <a href="{{ route('karyawan.index') }}" class="btn btn-secondary ml-2">Kembali</a>
                 </form>
+
+                <hr class="my-4">
+
+                <!-- Enroll Unique Face ID -->
+                <button onclick="enrollNewUser()" class="btn btn-success">Enroll New User</button>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.faceio.net/fio.js"></script>
+    <script type="text/javascript">
+        const faceio = new faceIO("fioa2994");
+
+        function enrollNewUser() {
+            faceio.enroll({
+                "locale": "auto",
+                "payload": {
+                    "whoami": 123456,
+                    "email": document.getElementById('email').value
+                }
+            }).then(userInfo => {
+                alert(`Enroll berhasil! Details:\nUnique Facial ID: ${userInfo.facialId}`);
+                document.getElementById('unique_face_id').value = userInfo.facialId;
+            }).catch(error => {
+                console.error(error);
+                alert("Enroll gagal.");
+            });
+        }
+    </script>
 @endsection

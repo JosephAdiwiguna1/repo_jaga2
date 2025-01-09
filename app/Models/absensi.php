@@ -25,4 +25,8 @@ class absensi extends Model
     public $incrementing =false;
     protected $keyType='string';
 
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'id_karyawan', 'id_karyawan');
+    }
 }
