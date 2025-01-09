@@ -6,6 +6,7 @@
         <i class="bi bi-list text-white"></i>
     </div>
     <ul class="nav flex-column px-3">
+        @if(Auth::user()->role == 'r1')
         <li class="nav-item mb-3">
             <a class="nav-link text-white text-decoration-none" onclick="toggleDropdown()"><i class="bi bi-clipboard"></i>
                 <span class="dropdown-toggle">Kategori</span></a>
@@ -24,6 +25,9 @@
             <a href="{{ route('karyawan.index') }}" class="nav-link text-white text-decoration-none"><i class="bi bi-person-fill"></i>
                 <span>Karyawan</span></a>
         </li>
+        @endif
+        
+        @if(Auth::user()->role == 'r2')
         <li class="nav-item mb-3">
             <a class="nav-link text-white text-decoration-none" onclick="toggleDropdown()"><i class="bi bi-check-circle"></i>
                 <span class="dropdown-toggle">Absensi</span></a>
@@ -32,9 +36,24 @@
                     <span>Data Absensi</span></a>
                 <a href="{{ route('pencatatan.absensi') }}" class="nav-link text-white text-decoration-none"><i class="bi bi-calendar2-check"></i>
                     <span>Kehadiran</span></a>
+                <a href="{{ route('laporanAbsensi') }}" class="nav-link text-white text-decoration-none"><i class="bi bi-calendar2-check"></i>
+                    <span>Laporan Absensi</span></a>
             </div>
         </li>
         <li class="nav-item mb-3">
+            <a href="{{ route('qr.form') }}" class="nav-link text-white text-decoration-none">
+                <i class="fas fa-list"></i> <span> Generate Qr Code</span>
+            </a>
+        </li>
+        @endif
+        @if(Auth::user()->role == 'r3')
+        <li class="nav-item mb-3">
+            <a href="{{ route('qr.scanner') }}" class="nav-link text-white text-decoration-none {{ request()->is('scan') ? 'active' : '' }}">
+                <i class="fas fa-qrcode"></i> <span> Scan Qr </span>
+            </a>
+        </li>
+        @endif
+        {{-- <li class="nav-item mb-3">
             <a href="#" class="nav-link text-white text-decoration-none"><i class="bi bi-check-circle"></i>
                 <span>Kehadiran</span></a>
         </li>
@@ -45,7 +64,7 @@
         <li class="nav-item mb-3">
             <a href="#" class="nav-link text-white text-decoration-none"><i class="bi bi-gear"></i>
                 <span>Pengaturan</span></a>
-        </li>
+        </li> --}}
     </ul>
     <a href="/logout"
         class="logout nav-item mt-auto m-3 p-2 pl-3d-flex align-items-center text-danger text-decoration-none">
